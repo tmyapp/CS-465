@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require('./app_server/models/db');
 const handlebars = require('hbs');
 
 const indexRouter = require('./app_server/routes/index');
