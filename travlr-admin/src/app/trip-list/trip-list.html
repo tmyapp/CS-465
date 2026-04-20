@@ -1,0 +1,63 @@
+<div *ngIf="isLoggedIn; else loginMessage">
+  <h2>{{ editingCode ? 'Edit Trip' : 'Add Trip' }}</h2>
+
+  <form (ngSubmit)="editingCode ? updateTrip() : addTrip()" #tripForm="ngForm">
+    <p>
+      <label>Code:</label><br>
+      <input type="text" name="code" [(ngModel)]="newTrip.code" required>
+    </p>
+
+    <p>
+      <label>Name:</label><br>
+      <input type="text" name="name" [(ngModel)]="newTrip.name" required>
+    </p>
+
+    <p>
+      <label>Length:</label><br>
+      <input type="text" name="length" [(ngModel)]="newTrip.length" required>
+    </p>
+
+    <p>
+      <label>Start:</label><br>
+      <input type="date" name="start" [(ngModel)]="newTrip.start" required>
+    </p>
+
+    <p>
+      <label>Resort:</label><br>
+      <input type="text" name="resort" [(ngModel)]="newTrip.resort" required>
+    </p>
+
+    <p>
+      <label>Price:</label><br>
+      <input type="text" name="perPerson" [(ngModel)]="newTrip.perPerson" required>
+    </p>
+
+    <p>
+      <label>Image:</label><br>
+      <input type="text" name="image" [(ngModel)]="newTrip.image" required>
+    </p>
+
+    <p>
+      <label>Description:</label><br>
+      <textarea name="description" [(ngModel)]="newTrip.description" required></textarea>
+    </p>
+
+    <button type="submit">{{ editingCode ? 'Update Trip' : 'Add Trip' }}</button>
+    <button type="button" *ngIf="editingCode" (click)="cancelEdit()">Cancel</button>
+  </form>
+
+  <hr>
+
+  <h2>Trips</h2>
+
+  <app-trip-card
+    *ngFor="let trip of trips"
+    [trip]="trip"
+    (delete)="deleteTrip($event)"
+    (edit)="editTrip($event)">
+  </app-trip-card>
+</div>
+
+<ng-template #loginMessage>
+  <p>Please log in to manage trips.</p>
+</ng-template>

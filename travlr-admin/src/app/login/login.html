@@ -1,0 +1,24 @@
+<div *ngIf="!loggedIn; else loggedInBlock">
+  <h2>Admin Login</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <p>
+      <label>Username:</label><br>
+      <input type="text" name="username" [(ngModel)]="username" required>
+    </p>
+
+    <p>
+      <label>Password:</label><br>
+      <input type="password" name="password" [(ngModel)]="password" required>
+    </p>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
+
+<ng-template #loggedInBlock>
+  <p>You are logged in.</p>
+  <button (click)="logout()">Logout</button>
+</ng-template>
